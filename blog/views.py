@@ -38,5 +38,5 @@ def loginUser(request):
 
 
 def blog (request):
-    # blog = Blog.objects.all()    , {'blogs':blog}  
-    return render(request, 'blog.html')
+    blog = Blog.objects.all()    
+    return render(request, 'blog.html', {'blogs':blog})
