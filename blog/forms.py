@@ -4,7 +4,7 @@ from enum import unique
 from logging import PlaceHolder
 from django import forms
 import django
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.contrib.auth.models import User
 
 class SignupForm(UserCreationForm):
@@ -27,3 +27,8 @@ class SignupForm(UserCreationForm):
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}),
         }
+
+
+class LoginForm(AuthenticationForm):
+    password = forms.CharField(widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
+    username = forms.CharField(widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}))
