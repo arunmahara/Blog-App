@@ -57,8 +57,7 @@ ROOT_URLCONF = 'MINIBLOG.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        # 'DIRS': [os.path.join(BASE_DIR, 'resumebuilder/templates/resumebuilder')],
+        'DIRS': [os.path.join(BASE_DIR, 'blog/templates/blog')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -136,3 +135,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+AUTHENTICATION_BACKEND = ['django.contrib.auth.backends.ModelBackend']
