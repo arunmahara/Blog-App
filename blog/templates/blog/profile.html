@@ -1,0 +1,17 @@
+{% extends 'blog.html' %}
+{% load static %}
+{% block content %}
+<div class="feed">
+
+<div class="card">
+  <img src="{% static 'image/profile.png'%}" alt="">
+  <h1>{{request.user.first_name}} {{request.user.last_name}}</h1>
+  <p class="title">@{{request.user.username}}</p>
+  <p class="title">{{request.user.email}}</p>
+  <small>Last Login</small>
+  <small>{{request.user.last_login}}</p></small>
+  <p><button>Change Profile</button></p>
+</div>
+
+</div>
+{% endblock %}
