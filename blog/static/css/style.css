@@ -134,6 +134,10 @@ body {
   padding-left: 15px;
   padding-right: 15px;
 }
+.post__bottom3{
+  margin-bottom: 8px;
+  padding-left: 15px;
+}
 
 /*profile page*/
 .card {
@@ -163,7 +167,7 @@ body {
   margin-bottom: 2px;
 }
 
-button {
+.chpf {
   border: none;
   display: inline-block;
   padding: 8px;
@@ -177,7 +181,7 @@ button {
 }
 
 
-button:hover, a:hover {
+.chpf:hover, a:hover {
   opacity: 0.8;
 }
 

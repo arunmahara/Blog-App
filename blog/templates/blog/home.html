@@ -4,6 +4,15 @@
  <!-- feed starts here-->
  <div class="feed">
     <!-- post starts -->
+    <!-- displays messages -->
+  {% for message in messages %}  
+  <div class="col-sm-4">
+  <div id="msg" class="alert alert-info alert-dismissable p-1 mb-1" style="text-align: center;">
+  <small style="color: green;">{{message}}</small>
+  </div>
+  </div>
+  {% endfor %}
+
     {% if blogs %}
     {% for blog in blogs %}
     <div class="post">

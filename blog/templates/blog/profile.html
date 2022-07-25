@@ -2,6 +2,15 @@
 {% load static %}
 {% block content %}
 <div class="feed">
+  <!-- displays messages -->
+  {% for message in messages %}  
+  <div class="col-sm-3">
+  <div id="msg" class="alert alert-info alert-dismissable p-1 mb-1" style="text-align: center;">
+  <small style="color: green;">{{message}}</small>
+  </div>
+  </div>
+  {% endfor %}
+
 
 <div class="card">
   <img src="{% static 'image/profile.png'%}" alt="">
@@ -10,7 +19,7 @@
   <p class="title">{{request.user.email}}</p>
   <small>Last Login</small>
   <small>{{request.user.last_login}}</p></small>
-  <p><button>Change Profile</button></p>
+  <p><a href="profileChange"><button class="chpf">Change Profile</button></p></a>
 </div>
 
 </div>

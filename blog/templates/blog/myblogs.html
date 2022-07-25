@@ -25,6 +25,14 @@
       <div class="post__bottom2">
         <p>{{blog.desc}}</p>
       </div>
+      <div class="post__bottom3">
+        <input type="submit" class="btn btn-primary btn-sm" value=" Update ">
+        <!-- delete button -->
+        <form action="deleteBlog" method="POST" class="d-inline">
+          {% csrf_token %}
+          <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+        </form>
+      </div>
     </div>
     {% endfor %}
     {% else %}

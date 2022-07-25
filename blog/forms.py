@@ -6,6 +6,7 @@ from django import forms
 import django
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.contrib.auth.models import User
+from requests import request
 from .models import Blog
 
 class SignupForm(UserCreationForm):
@@ -47,10 +48,10 @@ class PostForm(forms.ModelForm):
 
 class ProfileChangeForm(UserChangeForm):
     password = None
-
     def clean_email(self):   # for unique email 
+        user_email = self.instance.email
         email = self.cleaned_data['email']
-        if User.objects.filter(email=email).exists():
+        if User.objects.filter(email=email).exists() and user_email.lower() != email.lower():
             raise forms.ValidationError("Email already exists")
         return email
     
@@ -62,5 +63,6 @@ class ProfileChangeForm(UserChangeForm):
         model = User
         fields = ['username', 'first_name', 'last_name', 'email']
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}),
+            'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'})
+
         }

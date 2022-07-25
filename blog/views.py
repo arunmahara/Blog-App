@@ -35,7 +35,7 @@ def loginUser(request):
                 user = authenticate(username=username, password=password)
                 if user is not None:
                     login(request, user)
-                    messages. success(request, 'Login successful')
+                    messages.success(request, 'Login Successful')
                     return redirect('home')
         else:
             fm = LoginForm()
@@ -49,7 +49,7 @@ def logoutUser(request):
 
 @login_required(login_url='/')
 def home (request):
-    blog = Blog.objects.all()    
+    blog = Blog.objects.all().order_by('-datetime')    
     return render(request, 'home.html', {'blogs':blog})
 
 @login_required(login_url='/')
@@ -65,6 +65,7 @@ def post(request):
             instance = fm.save(commit = False)
             instance.user = request.user
             instance.save()
+            messages.success(request, 'Blog Posted')
             return redirect('home')
     else:
         fm = PostForm()
@@ -75,3 +76,14 @@ def post(request):
 def profile(request):
     return render(request, 'profile.html')
  
+@login_required(login_url='/')
+def profileChange(request):
+    if request.method =='POST':
+        fm =ProfileChangeForm(instance=request.user, data=request.POST)
+        if fm.is_valid():
+            fm.save()
+            messages.success(request, 'Update Successful')
+            return redirect('profile')
+    else:
+        fm = ProfileChangeForm(instance=request.user)
+    return render (request, 'profilechange.html', {'form':fm}) 

@@ -9,6 +9,7 @@ urlpatterns = [
     path('myblogs', views.myblogs, name='myblogs'),
     path('post', views.post, name='post'),
     path('profile', views.profile, name='profile'),
-    # path('profileChange', views.profileChange, name='profileChange'),
+    path('profileChange', views.profileChange, name='profileChange'),
+    path('deleteBlog', views.DeleteBlog, name='DeleteBlog'),
     path('logout', views.logoutUser, name='logout')
 ]
