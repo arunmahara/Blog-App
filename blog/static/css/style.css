@@ -20,9 +20,12 @@
   align-items: center;
   justify-content: space-evenly;
 }
+
 .header__left h2 a{
   text-decoration: none;
   color: black;
+  padding-left: 30px;
+  font-weight: bold; 
 }
 
 .header__input {
@@ -125,14 +128,15 @@ body {
   padding-left: 15px;
   padding-right: 15px;
 }
-.post__bottom1 p{
+.post__bottom1 h6{
   margin-bottom: 1px;
 }
 .post__bottom2 {
   margin-top: 1px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   padding-left: 15px;
   padding-right: 15px;
+  color: rgb(75, 74, 74);
 }
 .post__bottom3{
   margin-bottom: 8px;

@@ -3,9 +3,9 @@
 <div class="feed">
 <div class="col-sm-6">
     <h5 class=" alert alert-primary text-center mb-2 p-2">Make Blog</h5> 
+    
 <form action="" method="POST" class="shadow pb-4 p-5"  enctype="multipart/form-data" style="border-radius: 5px;"> 
   {% csrf_token %}
-
   <!-- displays forms -->
   {% for fm in form %}
     <div class="form-group mb-4">

@@ -1,0 +1,15 @@
+{% extends 'forgotpassword/index.html' %}
+{% block content %}
+
+<form action="" method = 'POST' novalidate>
+    {% csrf_token %}
+    {% for fm in form %}
+    {{fm.label_tag}} {{fm}} {{fm.errors|striptags}}  <br><br>
+    {% endfor %}
+
+    <input type="submit" value="Change Password">  <a href="profile">Back </a> <br><br>
+
+
+</form>
+
+{% endblock %}

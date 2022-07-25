@@ -54,7 +54,7 @@ def home (request):
 
 @login_required(login_url='/')
 def myblogs(request):
-    blog = Blog.objects.filter(user=request.user)
+    blog = Blog.objects.filter(user=request.user).order_by('-datetime')
     return render(request, 'myblogs.html', {'blogs':blog}) 
 
 @login_required(login_url='/')
@@ -87,3 +87,11 @@ def profileChange(request):
     else:
         fm = ProfileChangeForm(instance=request.user)
     return render (request, 'profilechange.html', {'form':fm}) 
+
+@login_required(login_url='/')
+def deleteBlog(request, id):
+    if request.method == 'POST':
+        blog = Blog.objects.get(pk=id)
+        blog.delete()
+        messages.success(request, 'Blog Deleted')
+        return redirect('myblogs')

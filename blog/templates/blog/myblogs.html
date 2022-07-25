@@ -2,6 +2,17 @@
 {% block content %}
 <!-- feed starts here-->
 <div class="feed">
+  <h5 class="col-sm-4 alert alert-primary text-center mb-2 p-1">My Blogs</h5> 
+
+  <!-- displays messages -->
+  {% for message in messages %}  
+  <div class="col-sm-4">
+  <div id="msg" class="alert alert-info p-1 mb-1" style="text-align: center;">
+  <small style="color: green;">{{message}}</small>
+  </div>
+  </div>
+  {% endfor %}
+
     <!-- post starts -->
     {% if blogs %}
     {% for blog in blogs %}
@@ -26,9 +37,9 @@
         <p>{{blog.desc}}</p>
       </div>
       <div class="post__bottom3">
-        <input type="submit" class="btn btn-primary btn-sm" value=" Update ">
+        <a href="{% url 'updateBlog' blog.id %}" class="btn btn-primary btn-sm">Update</a>
         <!-- delete button -->
-        <form action="deleteBlog" method="POST" class="d-inline">
+        <form action="{% url 'deleteBlog' blog.id %}" method="POST" class="d-inline">
           {% csrf_token %}
           <input type="submit" class="btn btn-danger btn-sm" value="Delete">
         </form>
