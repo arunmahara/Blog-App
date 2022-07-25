@@ -4,6 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Blog
+from django.contrib.auth.models import User
 from .forms import SignupForm, LoginForm
 
 # Create your views here.
@@ -15,12 +16,12 @@ def signupUser(request):
                 user = fm.save()
                 login (request, user)     
                 messages.success(request, 'Signup Successful')
-                return redirect('blog')      
+                return redirect('home')      
         else:
             fm = SignupForm()
         return render(request, 'signup.html', {'form':fm})
     else:
-        return redirect('blog')
+        return redirect('home')
 
 
 def loginUser(request):
@@ -35,18 +36,24 @@ def loginUser(request):
                 if user is not None:
                     login(request, user)
                     messages. success(request, 'Login successful')
-                    return redirect('blog')
+                    return redirect('home')
         else:
             fm = LoginForm()
         return render(request, 'login.html', {'form':fm})
     else:
-        return redirect('blog')   
+        return redirect('home')   
 
 def logoutUser(request):
     logout(request)
     return redirect('/')
 
 @login_required(login_url='/')
-def blog (request):
+def home (request):
     blog = Blog.objects.all()    
-    return render(request, 'blog.html', {'blogs':blog})
+    return render(request, 'home.html', {'blogs':blog})
+
+@login_required(login_url='/')
+def myblogs(request):
+    blog = Blog.objects.filter(user=request.user)
+    return render(request, 'myblogs.html', {'blogs':blog}) 
+

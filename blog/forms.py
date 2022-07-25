@@ -2,10 +2,12 @@ from cProfile import label
 from dataclasses import fields
 from enum import unique
 from logging import PlaceHolder
+from tkinter import Widget
 from django import forms
 import django
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.contrib.auth.models import User
+from .models import Blog
 
 class SignupForm(UserCreationForm):
 
@@ -23,7 +25,7 @@ class SignupForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email')
+        fields = ['username', 'first_name', 'last_name', 'email']
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}),
         }
@@ -32,3 +34,4 @@ class SignupForm(UserCreationForm):
 class LoginForm(AuthenticationForm):
     password = forms.CharField(widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
     username = forms.CharField(widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}))
+

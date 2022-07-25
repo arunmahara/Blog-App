@@ -1,0 +1,36 @@
+{% extends 'blog.html' %}
+{% block content %}
+
+ <!-- feed starts here-->
+ <div class="feed">
+    <!-- post starts -->
+    {% if blogs %}
+    {% for blog in blogs %}
+    <div class="post">
+      <div class="post__top">
+        <div class="post__topInfo">
+          <h3>{{blog.user.first_name}} {{blog.user.last_name}}</h3>
+          <p>Posted on: {{blog.datetime}}</p>
+        </div>
+      </div>
+
+      <div class="post__image">
+        <img src="{{blog.picture.url}}" alt="" />
+      </div>
+      
+      <div class="post__bottom1">
+        <p>{{blog.title}}</p>
+      </div>
+      <div class="post__bottom2">
+        <p>{{blog.desc}}</p>
+      </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <!-- <h2 style="margin: 20px;">Sorry, No Blogs Available</h2> -->
+    <h5 id="msg" class="alert alert-danger my-3">Sorry, No Blogs Available!</h5>
+    {% endif %}
+  </div>
+  <!-- feed ends -->
+
+{% endblock %}

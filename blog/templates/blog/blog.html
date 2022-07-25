@@ -15,7 +15,7 @@
     <!-- header starts -->
     <div class="header">
       <div class="header__left">
-          <h2><a href="blog">Blogger</a>&nbsp; &nbsp; &nbsp; &nbsp;</h2>
+          <h2><a href="home">Blogger</a>&nbsp; &nbsp; &nbsp; &nbsp;</h2>
         <div class="header__input">
           <span class="material-icons"> search </span>
           <input type="text" placeholder="Search"/>
@@ -24,16 +24,17 @@
 
       <div class="header__middle">
         <div class="header__option">
-          <span><a href="blog">Home</a></span>
+          <span><a href="{% url 'home' %}">Home</a></span>
         </div>
         <div class="header__option">
-          <span><a href="blog">Post</a></span>
+          <span><a href="post">Post</a></span>
         </div>
         <div class="header__option">
-          <span><a href="blog">My Blogs</a></span>
+
+          <span><a href="{% url 'myblogs' %}">My Blogs</a></span>
         </div>
         <div class="header__option">
-          <span><a href="blog">Profile</a></span>
+          <span><a href="profile">Profile</a></span>
         </div>
         <div class="header__option">
           <span><a href="logout">Logout</a></span>
@@ -44,37 +45,9 @@
 
     <!-- main body starts -->
     <div class="main__body">
-      <!-- feed starts here-->
-      <div class="feed">
-        <!-- post starts -->
-        {% if blogs %}
-        {% for blog in blogs %}
-        <div class="post">
-          <div class="post__top">
-            <div class="post__topInfo">
-              <h3>{{blog.user.first_name}} {{blog.user.last_name}}</h3>
-              <p>Posted on: {{blog.datetime}}</p>
-            </div>
-          </div>
+     {% block content %}
 
-          <div class="post__image">
-            <img src="{{blog.picture.url}}" alt="" />
-          </div>
-          
-          <div class="post__bottom1">
-            <p>{{blog.title}}</p>
-          </div>
-          <div class="post__bottom2">
-            <p>{{blog.desc}}</p>
-          </div>
-        </div>
-        {% endfor %}
-        {% else %}
-        <!-- <h2 style="margin: 20px;">Sorry, No Blogs Available</h2> -->
-        <h5 id="msg" class="alert alert-danger my-3">Sorry, No Blogs Available!</h5>
-        {% endif %}
-      </div>
-      <!-- feed ends -->
+     {% endblock%}
     </div>
     <!-- main body ends -->
   </body>
