@@ -2,7 +2,6 @@ from cProfile import label
 from dataclasses import fields
 from enum import unique
 from logging import PlaceHolder
-from tkinter import Widget
 from django import forms
 import django
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
@@ -35,3 +34,33 @@ class LoginForm(AuthenticationForm):
     password = forms.CharField(widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
     username = forms.CharField(widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}))
 
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Blog
+        fields = ['title', 'desc', 'picture']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Title'}),
+            'desc': forms.Textarea(attrs={'class': 'form-control','placeholder': 'Description'}),
+        }
+
+
+class ProfileChangeForm(UserChangeForm):
+    password = None
+
+    def clean_email(self):   # for unique email 
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("Email already exists")
+        return email
+    
+    first_name = forms.CharField(max_length=30, widget = forms.TextInput(attrs={'class': 'form-control','placeholder': 'First Name'}))
+    last_name =forms.CharField(max_length=30, widget= forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}))
+    email = forms.EmailField(max_length=100, widget = forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}))
+
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email']
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}),
+        }

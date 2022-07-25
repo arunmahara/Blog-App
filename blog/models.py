@@ -9,4 +9,4 @@ class Blog(models.Model):
     title = models.CharField(max_length=200)
     desc = models.TextField()
     datetime= models.DateTimeField(auto_now = True)
-    picture = models.ImageField(upload_to = 'pics')
+    picture = models.ImageField(upload_to = 'pics', blank=True)

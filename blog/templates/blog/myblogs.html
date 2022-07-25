@@ -13,9 +13,11 @@
         </div>
       </div>
 
+      {% if blog.picture %}
       <div class="post__image">
         <img src="{{blog.picture.url}}" alt="" />
       </div>
+      {% endif %}
       
       <div class="post__bottom1">
         <p>{{blog.title}}</p>

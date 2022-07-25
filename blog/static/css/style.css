@@ -135,6 +135,56 @@ body {
   padding-right: 15px;
 }
 
+/*profile page*/
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  margin: auto;
+  margin-top: 8px;
+  text-align: center;
+  font-family: arial;
+}
+.card img{
+  width:80%;
+  align-self: center;
+}
+.card h1{
+  margin-bottom: 1px;
+}
+.card small{
+  margin-top: 4px;
+  margin-bottom: 1px;
+  
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+  margin-bottom: 2px;
+}
+
+button {
+  border: none;
+  display: inline-block;
+  padding: 8px;
+  margin-bottom: -20px;
+  color: white;
+  background-color: rgb(80, 80, 238);
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+
+button:hover, a:hover {
+  opacity: 0.8;
+}
+
+
+
+
+
 
 @media (max-width: 768px) {
 

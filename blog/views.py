@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Blog
 from django.contrib.auth.models import User
-from .forms import SignupForm, LoginForm
+from .forms import SignupForm, LoginForm, PostForm, ProfileChangeForm
 
 # Create your views here.
 def signupUser(request):
@@ -56,4 +56,17 @@ def home (request):
 def myblogs(request):
     blog = Blog.objects.filter(user=request.user)
     return render(request, 'myblogs.html', {'blogs':blog}) 
+
+@login_required(login_url='/')
+def post(request):
+    if request.method == 'POST':
+        fm = PostForm(request.POST, request.FILES)
+        if fm.is_valid():
+            instance = fm.save(commit = False)
+            instance.user = request.user
+            instance.save()
+            return redirect('home')
+    else:
+        fm = PostForm()
+    return render(request,'post.html',{'form':fm})
 
