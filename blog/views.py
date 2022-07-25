@@ -95,3 +95,17 @@ def deleteBlog(request, id):
         blog.delete()
         messages.success(request, 'Blog Deleted')
         return redirect('myblogs')
+    
+@login_required(login_url='/')
+def updateBlog(request, id):
+    if request.method == 'POST':
+        blog = Blog.objects.get(pk=id)
+        blg = PostForm(request.POST, request.FILES, instance=blog)
+        if blg.is_valid():
+            blg.save()
+            messages.success(request, 'Post Updated')
+            return redirect('home')
+    else:
+        blog = Blog.objects.get(pk=id)
+        blg = PostForm(instance = blog)
+    return render (request, 'post.html', {'form':blg}) 
