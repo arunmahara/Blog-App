@@ -6,6 +6,8 @@
 .header {
   padding: 10px 20px;
   padding-left: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   display: flex;
   justify-content: space-between;
   position: sticky;
@@ -33,16 +35,26 @@
   align-items: center;
   background-color: #eff2f5;
   padding: 10px;
-  padding-right: 30px;
+  padding-right: 5px;
   margin-left: 20px;
   border-radius: 10px;
 }
 
 .header__input input {
   border: none;
+  padding: 1px;
   background-color: transparent;
   outline-width: 0;
+  /* padding-right: 30px; */
 }
+.header__input button {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 7px;
+  padding-right: 7px;
+  margin-top: -2px;
+}
+
 
 .header__middle {
   display: flex;
@@ -184,19 +196,15 @@ body {
   font-size: 18px;
 }
 
-
 .chpf:hover, a:hover {
   opacity: 0.8;
 }
 
 
-
-
-
-
 @media (max-width: 768px) {
 
-  .header__input input {
+  .header__input .input {
+    display: none;
   }
 
   .header__middle {

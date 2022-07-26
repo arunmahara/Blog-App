@@ -17,8 +17,11 @@
       <div class="header__left">
           <h2 style="font-family:'Times New Roman', Times, serif ;"><a href="home">Blogger</a>&nbsp; &nbsp; &nbsp; &nbsp;</h2>
         <div class="header__input">
-          <span class="material-icons"> search </span>
-          <input type="text" placeholder="Search"/>
+          <form method='POST'  action="/search">
+            {% csrf_token %}
+          <input type="search" placeholder="Search" name='search' id ='search' required/> 
+          <button class="material-icons btn btn-danger btn-sm" type="submit"> search </button>
+        </form>
         </div>
       </div>
 

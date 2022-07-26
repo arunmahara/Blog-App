@@ -1,5 +1,7 @@
+from multiprocessing import context
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from itertools import chain
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -109,3 +111,21 @@ def updateBlog(request, id):
         blog = Blog.objects.get(pk=id)
         blg = PostForm(instance = blog)
     return render (request, 'post.html', {'form':blg}) 
+    
+
+@login_required(login_url='/')
+def search(request):
+    if request.method == 'POST':
+        query = request.POST['search']
+        if len(query) > 50:
+            blog =  Blog.objects.none()
+        else:
+            blogtitle  = Blog.objects.filter(title__icontains=query)
+            blogdesc  = Blog.objects.filter(desc__icontains=query)
+            blog = blogtitle.union(blogdesc)
+            # blog = list(chain(bloguserfirst, blogtitle, blogdesc))  # another way of combining queryset
+            
+        context = {'blogs': blog}
+        return render (request, 'search.html', context) 
+    else:
+        return render (request, 'search.html') 

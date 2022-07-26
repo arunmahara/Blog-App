@@ -1,0 +1,39 @@
+{% extends 'blog.html' %}
+{% block content %}
+
+ <!-- feed starts here-->
+ <div class="feed">
+    <!-- post starts -->
+    <!-- displays messages -->
+    {% if blogs %}
+        <h5 class="alert alert-primary mt-0 p-2 mb-2 col-4 text-center">Search Results</h5>
+        {% for blog in blogs %}
+            <div class="post">
+            <div class="post__top">
+                <div class="post__topInfo">
+                <h3>{{blog.user.first_name}} {{blog.user.last_name}}</h3>
+                <p>Posted on: {{blog.datetime}}</p>
+                </div>
+            </div>
+
+            {% if blog.picture %}
+                <div class="post__image">
+                    <img src="{{blog.picture.url}}" alt="" />
+                </div>
+            {% endif %}
+            
+            <div class="post__bottom1">
+                <h6>: {{blog.title}}</h6>
+            </div>
+            <div class="post__bottom2">
+                <small>{{blog.desc}}</small>
+            </div>
+            </div>
+        {% endfor %}
+    {% else %}
+    <h5 class="alert alert-danger my-3">No Search Result</h5>
+    {% endif %}
+  </div>
+  <!-- feed ends -->
+
+{% endblock %}

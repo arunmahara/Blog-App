@@ -7,7 +7,7 @@
     <!-- displays messages -->
   {% for message in messages %}  
   <div class="col-sm-4">
-  <div id="msg" class="alert alert-info p-1 mb-1" style="text-align: center;">
+  <div id="msg" class="alert alert-info p-1 mb-1 text-center">
   <small style="color: green;">{{message}}</small>
   </div>
   </div>
@@ -38,8 +38,7 @@
     </div>
     {% endfor %}
     {% else %}
-    <!-- <h2 style="margin: 20px;">Sorry, No Blogs Available</h2> -->
-    <h5 id="msg" class="alert alert-danger my-3">Sorry, No Blogs Available!</h5>
+    <h5 class="alert alert-danger my-3">Sorry, No Blogs Available!</h5>
     {% endif %}
   </div>
   <!-- feed ends -->

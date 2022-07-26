@@ -13,7 +13,7 @@ urlpatterns = [
     path('profileChange', views.profileChange, name='profileChange'),
     path('deleteBlog/<int:id>/', views.deleteBlog, name='deleteBlog'),
     path('updateBlog/<int:id>/', views.updateBlog, name='updateBlog'),
+    path('search', views.search, name='search'),
     path('logout', views.logoutUser, name='logout'),
-
-    path('', include('django.contrib.auth.urls'))
+    path('', include('django.contrib.auth.urls'))   #reset password with email
 ]
