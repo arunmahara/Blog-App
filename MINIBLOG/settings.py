@@ -57,7 +57,7 @@ ROOT_URLCONF = 'MINIBLOG.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'blog/templates/blog')],
+        'DIRS': [os.path.join(BASE_DIR, 'blog/templates/blog')],   #path of templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -83,7 +83,6 @@ DATABASES = {
         'USER': os.environ.get('USER'),
         'PASSWORD': os.environ.get('PASSWORD'),
         'HOST': os.environ.get('HOST')
-
     }
 }
 
@@ -138,9 +137,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTHENTICATION_BACKEND = ['django.contrib.auth.backends.ModelBackend']
 
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'   # console email
 
-# SMTP Configuration  # for real mail service
+# SMTP Configuration  # for sending mail
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
 EMAIL_PORT = 587

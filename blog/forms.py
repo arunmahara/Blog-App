@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from requests import request
 from .models import Blog
 
+# signup form
 class SignupForm(UserCreationForm):
 
     def clean_email(self):   # for unique email 
@@ -16,7 +17,8 @@ class SignupForm(UserCreationForm):
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError("Email already exists")
         return email
-    
+
+    # setting attributes to model form
     first_name = forms.CharField(max_length=30, widget = forms.TextInput(attrs={'class': 'form-control','placeholder': 'First Name'}))
     last_name =forms.CharField(max_length=30, widget= forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}))
     email = forms.EmailField(max_length=100, widget = forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}))
@@ -30,12 +32,12 @@ class SignupForm(UserCreationForm):
             'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}),
         }
 
-
+# login form
 class LoginForm(AuthenticationForm):
     password = forms.CharField(widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
     username = forms.CharField(widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}))
 
-
+# blog post form
 class PostForm(forms.ModelForm):
     class Meta:
         model = Blog
@@ -45,10 +47,10 @@ class PostForm(forms.ModelForm):
             'desc': forms.Textarea(attrs={'class': 'form-control','placeholder': 'Description'}),
         }
 
-
+# profile update form
 class ProfileChangeForm(UserChangeForm):
-    password = None
-    def clean_email(self):   # for unique email 
+    password = None  #excludes password
+    def clean_email(self):   # for unique email excluding own email
         user_email = self.instance.email
         email = self.cleaned_data['email']
         if User.objects.filter(email=email).exists() and user_email.lower() != email.lower():
@@ -64,5 +66,4 @@ class ProfileChangeForm(UserChangeForm):
         fields = ['username', 'first_name', 'last_name', 'email']
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'})
-
-        }
+            }
