@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_unused_media'
+    'django_unused_media',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -146,3 +147,13 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USERNAME')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_Filter_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],   #globally setting filter
+    'SEARCH_PARAM': 'query',  #bypass ?search by ?query in url
+
+    'DEFAULT_PAGINATION_CLASS':'rest_framework.pagination.PageNumberPagination',   #globally setting pagination for all views or class 
+    'PAGE_SIZE': 3   # shows 3 data in one page
+
+}
