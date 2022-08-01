@@ -1,4 +1,3 @@
-import values
 from blog.models import Blog
 from django.contrib.auth.models import User
 from rest_framework import serializers
