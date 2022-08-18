@@ -31,17 +31,21 @@
       {% endif %}
       
       <div class="post__bottom1">
-        <p>{{blog.title}}</p>
+        <h6>: {{blog.title}}</h6>
       </div>
       <div class="post__bottom2">
-        <p>{{blog.desc}}</p>
+        <small>{{blog.desc}}</small>
+      </div>
+      <div class="post__bottom3" >
+        <hr>
+        <div class="fb-comments" data-href="http://127.0.0.1:8000/home/{{blog.id}}" data-width="100%" data-numposts="2"></div>   <!-- facebook comment plugin -->
       </div>
       <div class="post__bottom3">
-        <a href="{% url 'updateBlog' blog.id %}" class="btn btn-primary btn-sm">Update</a>
+        <a href="{% url 'updateBlog' blog.id %}" class="btn btn-secondary btn-sm">Update Post</a>
         <!-- delete button -->
         <form action="{% url 'deleteBlog' blog.id %}" method="POST" class="d-inline">
           {% csrf_token %}
-          <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+          <input type="submit" class="btn btn-danger btn-sm" value="Delete Post">
         </form>
       </div>
     </div>

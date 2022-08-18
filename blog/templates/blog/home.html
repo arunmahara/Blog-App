@@ -35,6 +35,10 @@
       <div class="post__bottom2">
          <small>{{blog.desc}}</small>
       </div>
+      <div class="post__bottom3" >
+        <hr>
+        <div class="fb-comments" data-href="http://127.0.0.1:8000/home/{{blog.id}}" data-width="100%" data-numposts="2"></div>   <!-- facebook comment plugin -->
+      </div>
     </div>
     {% endfor %}
     {% else %}

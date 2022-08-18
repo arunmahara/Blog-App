@@ -158,13 +158,13 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 3,   # shows 3 data in one page
 
     'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework_simplejwt.authentication.JWTAuthentication'],  # globally setting JWTAuthentication
-    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.IsAuthenticated'] # globally setting permission classes
+    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.IsAuthenticated'], # globally setting permission classes
 
+    # 'DEFAULT_RENDERER_CLASSES':('rest_framework.renderers.JSONRenderer')
 }
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),    # change default validity time of access token which is 5 mins to 10 mins
     'REFRESH_TOKEN_LIFETIME': timedelta(days=2),   # change default validity time of refresh token which is 1 day to 2 days
     # 'ROTATE_REFRESH_TOKENS': True   # to generate new refresh token everytime when new access token is requested  (gives both access token and refresh token)
-
 }
