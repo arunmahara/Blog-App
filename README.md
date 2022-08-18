@@ -8,6 +8,8 @@ PostgreSQL <br>
 Bootstrap <br>
 jQuery <br>
 SMTP (for reset password with email) <br>
+RESTful API (DRF) <br>
+JWTAuthentication 
 
 ### Features:
 Post Blog (with/without image)<br>
@@ -19,6 +21,7 @@ User Signup <br>
 User Login <br>
 User Authentication <br>
 Password Reset with Email <br>
+RESTful API with JWTAuthentication
 
 
 ### DEMO
