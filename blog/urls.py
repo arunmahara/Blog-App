@@ -2,6 +2,7 @@ from django import views
 from django.urls import path, include
 from . import views
 from django.contrib.auth import views as auth_views
+from .forms import EmailValidationOnForgotPassword  #email validation class for password_reset 
 
 urlpatterns = [
     path('', views.loginUser, name='login'),
@@ -15,5 +16,7 @@ urlpatterns = [
     path('updateBlog/<int:id>/', views.updateBlog, name='updateBlog'),
     path('search', views.search, name='search'),
     path('logout', views.logoutUser, name='logout'),
+
+    path('password_reset/',auth_views.PasswordResetView.as_view(form_class=EmailValidationOnForgotPassword),name='password_reset'),  
     path('', include('django.contrib.auth.urls'))   #reset password with email
 ]

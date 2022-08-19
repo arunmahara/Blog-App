@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, User
 from django.contrib.auth.models import User
 from requests import request
 from .models import Blog
+from django.contrib.auth.forms import PasswordResetForm   # password_reset_form to override
 
 # signup form
 class SignupForm(UserCreationForm):
@@ -66,3 +67,12 @@ class ProfileChangeForm(UserChangeForm):
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'})
             }
+
+
+# check email for password_reset
+class EmailValidationOnForgotPassword(PasswordResetForm):  
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if not User.objects.filter(email__iexact=email, is_active=True).exists():
+            raise forms.ValidationError("There is no user registered with the specified email address!")
+        return email
