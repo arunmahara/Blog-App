@@ -11,11 +11,19 @@
     </div>
   {% endfor %}
 
-  <input type="submit" class="btn btn-primary" value=" Login ">
-  <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary mx-3">
-    <i class="fab fa-facebook fa-fw"></i> Login with Facebook
+  <input type="submit" class="btn btn-primary mb-3" value=" Login ">
+  <!-- google login -->
+  <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-secondary mb-3 mx-2">
+    <!-- <i class="fab fa-google fa-fw"> </i> -->
+    <img src="static/image/googleicon.png" alt="" style="width: 21px;"> Login with Google
   </a>
-  <a href="{% url 'password_reset' %}" class="m-4" style="text-decoration: none;">Forgot Password?</a>
+  <!-- google login -->
+  <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-secondary mb-3">
+    <!-- <i class="fab fa-facebook fa-fw"></i> -->
+    <img src="static/image/facebookicon.png" alt="" style="width: 23px;"> Login with Facebook
+  </a>
+  <br>
+  <a href="{% url 'password_reset' %}" class="" style="text-decoration: none;">Forgot Password?</a>
 
   <!-- displays error messages on form -->
   {% if form.non_field_errors %}
