@@ -17,6 +17,9 @@ urlpatterns = [
     path('search', views.search, name='search'),
     path('logout', views.logoutUser, name='logout'),
 
-    path('password_reset/',auth_views.PasswordResetView.as_view(form_class=EmailValidationOnForgotPassword),name='password_reset'),  
-    path('', include('django.contrib.auth.urls'))   #reset password with email
+    path('password_reset/',auth_views.PasswordResetView.as_view(form_class=EmailValidationOnForgotPassword),name='password_reset'),  #password_reset_form
+    path('', include('django.contrib.auth.urls')),   #reset password with email
+
+    path('oauth/', include('social_django.urls', namespace='social')),  # social auth
+
 ]

@@ -11,7 +11,11 @@
     </div>
   {% endfor %}
 
-  <input type="submit" class="btn btn-primary" value=" Login "> <a href="{% url 'password_reset' %}" class="m-4" style="text-decoration: none;">Forgot Password?</a>
+  <input type="submit" class="btn btn-primary" value=" Login ">
+  <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary mx-3">
+    <i class="fab fa-facebook fa-fw"></i> Login with Facebook
+  </a>
+  <a href="{% url 'password_reset' %}" class="m-4" style="text-decoration: none;">Forgot Password?</a>
 
   <!-- displays error messages on form -->
   {% if form.non_field_errors %}

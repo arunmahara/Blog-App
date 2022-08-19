@@ -17,7 +17,7 @@ def signupUser(request):
             fm = SignupForm(request.POST)
             if fm.is_valid():
                 user = fm.save()
-                login (request, user)     
+                login (request, user, backend='django.contrib.auth.backends.ModelBackend')  #auto login after signup   
                 messages.success(request, 'Signup Successful')
                 return redirect('home')      
         else:
