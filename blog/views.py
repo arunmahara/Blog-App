@@ -1,13 +1,12 @@
-from multiprocessing import context
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from itertools import chain
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Blog
 from django.contrib.auth.models import User
 from .forms import SignupForm, LoginForm, PostForm, ProfileChangeForm
+from django.urls import reverse
 
 # Create your views here.
 # user sign up
@@ -133,7 +132,16 @@ def search(request):
             blogdesc  = Blog.objects.filter(desc__icontains=query)
             blog = blogtitle.union(blogdesc)
             # blog = list(chain(bloguserfirst, blogtitle, blogdesc))  # another way of combining queryset     
-        context = {'blogs': blog}
+        context = {'blogs': blog, 'query':query}
         return render (request, 'search.html', context) 
     else:
-        return render (request, 'search.html') 
+        return HttpResponseNotFound('Page Not Found')
+
+# like blog
+def likeBlog(request, id):
+    blog = get_object_or_404(Blog, pk=id) 
+    if blog.likes.filter(id=request.user.id).exists():
+        blog.likes.remove(request.user)
+    else:
+        blog.likes.add(request.user)
+    return HttpResponseRedirect(reverse('home'))

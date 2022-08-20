@@ -21,7 +21,7 @@
         <div class="header__input">
           <form method='POST'  action="/search">
             {% csrf_token %}
-          <input type="search" placeholder="Search" name='search' id ='search' required/> 
+          <input type="search" placeholder="Search" name='search' value='{{query}}' required/> 
           <button class="material-icons btn btn-danger btn-sm" type="submit"> search </button>
         </form>
         </div>
