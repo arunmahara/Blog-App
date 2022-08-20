@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'crispy_forms',
     'social_django',  #for social login
+    'django_social_share'  # for social share
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

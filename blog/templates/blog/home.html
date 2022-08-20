@@ -1,4 +1,5 @@
 {% extends 'blog.html' %}
+{% load social_share %}
 {% block content %}
 
  <!-- feed starts here-->
@@ -41,6 +42,9 @@
           <button type="submit" name="like_blog" value="{{ blog.id }}" class="btn"><i class="fa-regular fa-thumbs-up fa-xl" ></i> {{blog.total_likes}}</button>
         </form>
         <button class="btn"><i class="fa-regular fa-comment-dots fa-xl"></i></button>
+        <!-- {% post_to_facebook object_or_url "<p style='color: green;'>facebook</p>" %} -->
+        <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//127.0.0.1%3A8000/home/{{blog.id}}" target="_blank" class="btn"><i class="fa-solid fa-share fa-xl fa-fade"></i></a>
+        <!-- <div class="fb-like" data-href="http://127.0.0.1:8000/home/{{blog.id}}" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="true"></div> -->  <!-- facebook like/share plugin -->
       </div>
       <div class="post__bottom3">
         <hr class="mt-0 mb-1">
