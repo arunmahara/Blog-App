@@ -9,16 +9,23 @@ Bootstrap <br>
 jQuery <br>
 SMTP (for reset password with email) <br>
 RESTful API (DRF) <br>
-JWTAuthentication 
+JWTAuthentication <br>
+Social Auth <br>
+Facebook Plugin <br>
 
 ### Features:
 Post Blog (with/without image)<br>
+Like Blog <br>
+Comment <br>
+Share Blog <br>
 Update Blog <br>
 Delete Blog <br>
 Search Blog <br>
 Profile Update <br>
 User Signup <br>
 User Login <br>
+Login with Google <br>
+Login with Facebook <br>
 User Authentication <br>
 Password Reset with Email <br>
 RESTful API with JWTAuthentication
