@@ -13,7 +13,7 @@
               <hr class="my-0">
             </div>
             <div class="connect mt-2">
-                  <form method="POST" action="">
+                  <form method="POST" action="{% url 'followUnfollow' user.id %}">
                     {% csrf_token %}
                     {% if user in following_user %}
                     <button class="btn btn-sm btn-outline-danger "> Unfollow </button> 

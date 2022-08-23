@@ -155,3 +155,14 @@ def connectUser(request):
         following_user.append(each.person)
     context = {'users':users, 'following_user':following_user}
     return render(request, 'connect.html', context)
+
+#follow/unfollow user
+def followUnfollow(request, id):
+    user = User.objects.get(pk=id)
+    connection = Connection.objects.filter(person=user).filter(followers=request.user)     # object where person is specific user and follower is current user
+    if request.method == 'POST':
+        if connection:                           
+            connection.delete() #unfollow
+        else:
+            Connection.objects.create(person=user, followers=request.user)  #follow
+    return redirect('connect')
