@@ -39,7 +39,14 @@
       </div>
       <div class="likecommentshare">
         <form action="{% url 'likeblog' blog.id %}">
-          <button type="submit" name="like_blog" value="{{ blog.id }}" class="btn"><i class="fa-regular fa-thumbs-up fa-xl" ></i> {{blog.total_likes}}</button>
+          <button type="submit" name="like_blog" value="{{ blog.id }}" class="btn">
+            {% if blog.id in likedBlog %}
+              <i class="fa-regular fa-thumbs-up fa-xl text-primary"></i> {{blog.total_likes}}
+            {% else %}
+              <i class="fa-regular fa-thumbs-up fa-xl"></i> {{blog.total_likes}}
+            {% endif %}
+          </button>
+          <!-- <input type="submit" name="like" value="Like" class="btn btn-primary"> -->
         </form>
         <button class="btn"><i class="fa-regular fa-comment-dots fa-xl"></i></button>
         <!-- {% post_to_facebook object_or_url "<p style='color: green;'>facebook</p>" %} -->
