@@ -1,4 +1,3 @@
-from itertools import chain
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.contrib.auth import login, logout, authenticate
@@ -55,25 +54,12 @@ def logoutUser(request):
 # restrictions for anonymous user using decorators
 @login_required(login_url='/') 
 def home (request):
-    blog = Blog.objects.all().order_by('-datetime')
-    following = Connection.objects.filter(followers=request.user)
-    
+    blog = Blog.objects.all().order_by('-datetime') 
     likedBlog = []  #blogs liked by current user
     for each in blog:   
         if each.likes.filter(id=request.user.id).exists(): #checks if specific blog has user or not (user has liked or not)
             likedBlog.append(each.id)
 
-    followed_blogs =[]       #nested list of blog objects of users followed by current user
-    followed_user_blog =[]   #list of blog objects of users followed by current user
-    for each in following:
-        user_id=each.person.id  #user id followed by current user
-        if Blog.objects.filter(user=user_id).exists():
-            blg = Blog.objects.filter(user=user_id).order_by('-datetime') 
-            followed_blogs.append(list(blg)) #blog objects of user followed by current user
-    
-    for list_objects in followed_blogs:   #remove linked list
-        for each in list_objects:
-            followed_user_blog.append(each)
     context = {'blogs':blog, 'likedBlog':likedBlog}
     return render(request, 'home.html', context)
 
