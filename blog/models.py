@@ -8,7 +8,7 @@ class Blog(models.Model):
     desc = models.TextField()
     datetime= models.DateTimeField(auto_now = True)
     picture = models.ImageField(upload_to = 'pics', blank=True)
-    likes = models.ManyToManyField(User, related_name='blog_like')
+    likes = models.ManyToManyField(User, related_name='blog_like', default=None)
 
     def total_likes(self):
         return self.likes.count()

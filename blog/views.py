@@ -1,3 +1,4 @@
+from itertools import chain
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.contrib.auth import login, logout, authenticate
@@ -136,7 +137,7 @@ def search(request):
             blogtitle  = Blog.objects.filter(title__icontains=query)  #search query on database
             blogdesc  = Blog.objects.filter(desc__icontains=query)
             blog = blogtitle.union(blogdesc)
-            # blog = list(chain(bloguserfirst, blogtitle, blogdesc))  # another way of combining queryset     
+            # blog = list(chain(bloguserfirst, blogtitle, blogdesc))  #another way of combining queryset     
         context = {'blogs': blog, 'query':query}
         return render (request, 'search.html', context) 
     else:
@@ -146,15 +147,16 @@ def search(request):
 def likeBlog(request, id):
     blog = get_object_or_404(Blog, pk=id) 
     if blog.likes.filter(id=request.user.id).exists():
-        blog.likes.remove(request.user)
+        blog.likes.remove(request.user) #unlike blog 
     else:
-        blog.likes.add(request.user)
+        blog.likes.add(request.user)   #like blog 
     return HttpResponseRedirect(reverse('home'))
 
 # shows all user in connect template
+@login_required(login_url='/') 
 def connectUser(request):
     users = User.objects.all()
-    following = Connection.objects.filter(followers=request.user)   # following users
+    following = Connection.objects.filter(followers=request.user)   #following users
     following_user =[]
     for each in following:
         following_user.append(each.person)
@@ -172,7 +174,8 @@ def followUnfollow(request, id):
             Connection.objects.create(person=user, followers=request.user)  #follow
     return redirect('connect')
 
-# show user details  
+# show user details
+@login_required(login_url='/')   
 def userDetails(request):
     user_id = request.POST.get('details')
     user = User.objects.get(pk=user_id)
@@ -183,3 +186,37 @@ def userDetails(request):
     blog = Blog.objects.filter(user=user).order_by('-datetime')  #blog posted by user
     context = {'user':user,'followers':followers, 'total_followers':total_followers, 'following':following, 'total_following':total_following, 'blogs':blog}
     return render(request, 'userdetails.html', context)
+
+
+# show blogs of only follwing user
+@login_required(login_url='/') 
+def followingPost(request):
+    blog = Blog.objects.all()
+    likedBlog = []  #blogs liked by current user
+    for each in blog:   
+        if each.likes.filter(id=request.user.id).exists(): #checks if specific blog has user or not (user has liked or not)
+            likedBlog.append(each.id)
+
+    following = Connection.objects.filter(followers=request.user) #users followed by current user
+    followed_blogs =[]       #nested list of blog objects of users followed by current user
+    followed_user_blog =[]   #list of blog objects of users followed by current user
+    for each in following:
+        user_id=each.person.id  #user id followed by current user
+        if Blog.objects.filter(user=user_id).exists():
+            blg = Blog.objects.filter(user=user_id).order_by('-datetime') 
+            followed_blogs.append(list(blg)) #blog objects of user followed by current user
+    
+    for list_objects in followed_blogs:   #remove linked list
+        for each in list_objects:
+            followed_user_blog.append(each)
+    context = {'followed_user_blog':followed_user_blog, 'likedBlog':likedBlog}
+    return render(request, 'followingpost.html', context)
+
+#like followinguserblog
+def likeFollowingBlog(request, id):
+    blog = get_object_or_404(Blog, pk=id) 
+    if blog.likes.filter(id=request.user.id).exists():
+        blog.likes.remove(request.user) #unlike blog 
+    else:
+        blog.likes.add(request.user)   #like blog 
+    return HttpResponseRedirect(reverse('followingpost'))

@@ -10,8 +10,7 @@
     <link rel="stylesheet" href="{% static '/css/style.css' %}" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/ef227d6ff1.js" crossorigin="anonymous"></script>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v14.0" nonce="NIDnWpLd"></script>   <!-- facebook plugin -->
-
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v14.0" nonce="NIDnWpLd"></script>  <!-- facebook plugin -->
   </head>
   <body>
     <!-- header starts -->
@@ -21,10 +20,11 @@
         <div class="header__input">
           <form method='POST'  action="/search">
             {% csrf_token %}
-          <input type="search" placeholder="Search" name='search' value='{{query}}' required/> 
+          <input type="search" placeholder="Search" name='search' value='{{query}}' id ='search' required/> 
           <button class="material-icons btn btn-danger btn-sm" type="submit"> search </button>
         </form>
         </div>
+        <a href="{% url 'followingpost' %}" class="mx-4"> <img src="static/image/following.png" style="width: 30px;"><small class="mx-1">Following</small></a>
       </div>
 
       <div class="header__middle">
@@ -35,7 +35,6 @@
           <span><a href="post">Post</a></span>
         </div>
         <div class="header__option">
-
           <span><a href="{% url 'myblogs' %}">My Blogs</a></span>
         </div>
         <div class="header__option">
@@ -45,7 +44,7 @@
           <span><a href="profile">Profile</a></span>
         </div>
         <div class="header__option">
-          <span><a href="logout">Logout</a></span>
+          <span><a href="logout"><img src="static/image/logout.png" style="width: 25px;"></a></span>
         </div>
       </div>
     </div>
@@ -59,12 +58,11 @@
     </div>
 
     <!-- main body ends -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
-       setTimeout( function() {    //for auto hide message 
-           jQuery('#msg').hide();
-       }, 3000 );
-   
+      setTimeout( function() {    //for auto hide message 
+          jQuery('#msg').hide();
+      }, 3000 );
      </script>
   </body>
 </html>

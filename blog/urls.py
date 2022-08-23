@@ -20,7 +20,8 @@ urlpatterns = [
     path('connect', views.connectUser, name='connect'),
     path('followUnfollow/<int:id>/', views.followUnfollow, name='followUnfollow'),
     path('userdetails', views.userDetails, name='userdetails'),
-
+    path('followingpost', views.followingPost, name='followingpost'),
+    path('likefollowingblog/<int:id>/', views.likeFollowingBlog, name='likefollowingblog'),
 
     path('password_reset/',auth_views.PasswordResetView.as_view(form_class=EmailValidationOnForgotPassword),name='password_reset'),  #password_reset_form
     path('', include('django.contrib.auth.urls')),   #reset password with email
