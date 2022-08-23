@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Blog
+from .models import Blog, Connection
 from django.contrib.auth.models import User
 from .forms import SignupForm, LoginForm, PostForm, ProfileChangeForm
 from django.urls import reverse
@@ -145,3 +145,13 @@ def likeBlog(request, id):
     else:
         blog.likes.add(request.user)
     return HttpResponseRedirect(reverse('home'))
+
+# shows all user in connect template
+def connectUser(request):
+    users = User.objects.all()
+    following = Connection.objects.filter(followers=request.user)   # following users
+    following_user =[]
+    for each in following:
+        following_user.append(each.person)
+    context = {'users':users, 'following_user':following_user}
+    return render(request, 'connect.html', context)

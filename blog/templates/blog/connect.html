@@ -1,0 +1,33 @@
+{% extends 'blog.html' %}
+{% block content %}
+      <div class="feed">
+        {% for user in users %}
+          <div class="post">
+            <div class="post__top">
+              <div class="post__topInfo">
+                <h3>{{user.first_name}} {{user.last_name}}</h3>
+                <p>{{user.username}}</p>
+              </div>
+            </div>
+            <div class="post__bottom2">
+              <hr class="my-0">
+            </div>
+            <div class="connect mt-2">
+                  <form method="POST" action="">
+                    {% csrf_token %}
+                    {% if user in following_user %}
+                    <button class="btn btn-sm btn-outline-danger "> Unfollow </button> 
+                    {% else %}
+                    <button class="btn btn-sm btn-outline-primary"> Follow </button>  
+                    {% endif %}
+                  </form>
+                  <form method="POST" action="">
+                    {% csrf_token %}
+                    <button type="submit" name="details" value="{{user.id}}" class="btn btn-sm btn-outline-primary mx-2"> More </button>
+                    <!-- <input type="submit" class="btn btn-sm btn-outline-primary mx-2" value="More"> -->
+                  </form>
+            </div>
+          </div>
+        {% endfor%}
+      </div>
+{% endblock %}

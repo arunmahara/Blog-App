@@ -12,3 +12,7 @@ class Blog(models.Model):
 
     def total_likes(self):
         return self.likes.count()
+
+class Connection(models.Model):
+    person = models.ForeignKey(User, on_delete=models.CASCADE, related_name='person') 
+    followers= models.ForeignKey(User, on_delete=models.CASCADE, related_name='followers')  

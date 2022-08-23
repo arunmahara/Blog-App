@@ -17,6 +17,10 @@
   box-shadow: 0 5px 8px -9px rgba(0, 0, 0, 0.75);
 }
 
+.header a{
+  text-decoration: none;
+  color: rgb(84, 84, 84)}
+
 .header__left {
   display: flex;
   align-items: center;
@@ -94,7 +98,7 @@ body {
   padding: 30px 100px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content:space-between;
   align-items: center;
 }
 
@@ -143,14 +147,17 @@ body {
 .post__bottom1 h6{
   margin-bottom: 1px;
 }
-.post__bottom2, .likecommentshare {
+.post__bottom2, .likecommentshare, .connect {
   margin-top: 1px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   padding-left: 15px;
   padding-right: 15px;
   color: rgb(75, 74, 74);
 }
-
+.connect{
+  display: flex;
+  margin-bottom: 10px;
+}
 .likecommentshare{
   display: flex;
   justify-content: space-between;
@@ -161,7 +168,6 @@ body {
   padding-left: 15px;
   padding-right: 15px;
 }
-
 .post__bottom4{
   margin-top: -7px;
 }
@@ -169,7 +175,7 @@ body {
 /*profile page*/
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 400px;
+  max-width: 450px;
   margin: auto;
   margin-top: 8px;
   text-align: center;
@@ -186,6 +192,11 @@ body {
   margin-top: 4px;
   margin-bottom: 1px;
   
+}
+
+.card button:hover {
+  background-color: rgb(14, 24, 136);
+  transition: 500ms;
 }
 
 .title {
