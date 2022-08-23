@@ -81,7 +81,12 @@ def post(request):
 # user profile
 @login_required(login_url='/')
 def profile(request):
-    return render(request, 'profile.html')
+    followers = Connection.objects.filter(person=request.user.id)  #follower objects of current user
+    following = Connection.objects.filter(followers=request.user)  #following objects of current user
+    total_followers = followers.count()
+    total_following = following.count()
+    context = {'followers':followers, 'total_followers':total_followers, 'following':following, 'total_following':total_following}
+    return render(request, 'profile.html', context)
 
 # updates user profile
 @login_required(login_url='/')

@@ -15,11 +15,47 @@
 <div class="card">
   <img src="{% static 'image/profile.png'%}" alt="">
   <h1>{{request.user.first_name}} {{request.user.last_name}}</h1>
+  <a href="#divOne" style="text-decoration: none;" class="mb-0 text-primary">
+    {{total_followers}}<small style = "color: grey;"> Followers</small>
+    <small class="text-danger"> | </small>
+    {{total_following}}<small style = "color: grey;"> Following</small>
+  </a>
   <p class="title">@{{request.user.username}}</p>
   <p class="title">{{request.user.email}}</p>
   <small>Last Login</small>
   <small>{{request.user.last_login}}</p></small>
   <p><a href="profileChange"><button class="chpf">Change Profile</button></p></a>
+</div>
+
+
+<div class="overlay" id="divOne">
+  <div class="wrapper">
+    <h3>{{request.user.first_name}} {{request.user.last_name}}</h3><a class="close" href="#">&times;</a>
+    <h6 class="text-primary">{{total_followers}}<small style = "color: grey;"> Followers </small> <small class="text-danger"> | </small> {{total_following}}<small style = "color: grey;"> Following</small></h6>
+    <div class="content">
+      <div class="container">
+        <form>
+          <label>Followers</label>
+          {% if followers %}
+            {% for each in followers %}
+              <h6>{{each.followers.first_name}} {{each.followers.last_name}} @{{each.followers}}</h6>
+            {% endfor %}
+          {% else %}
+              <h6>No Follower</h6>
+          {% endif %}
+          
+          <label class="mt-3">Following</label>
+          {% if following %}
+            {% for each in following %}
+              <h6>{{each.person.first_name}} {{each.person.last_name}} @{{each.person}}</h6>
+            {% endfor %}
+            {% else %}
+            <h6>No Following</h6>
+          {% endif %} 
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 </div>
