@@ -19,6 +19,7 @@ urlpatterns = [
     path('likeblog/<int:id>/', views.likeBlog, name='likeblog'),
     path('connect', views.connectUser, name='connect'),
     path('followUnfollow/<int:id>/', views.followUnfollow, name='followUnfollow'),
+    path('userdetails', views.userDetails, name='userdetails'),
 
 
     path('password_reset/',auth_views.PasswordResetView.as_view(form_class=EmailValidationOnForgotPassword),name='password_reset'),  #password_reset_form

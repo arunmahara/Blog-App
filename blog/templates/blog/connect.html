@@ -21,7 +21,7 @@
                     <button class="btn btn-sm btn-outline-primary"> Follow </button>  
                     {% endif %}
                   </form>
-                  <form method="POST" action="">
+                  <form method="POST" action="{% url 'userdetails' %}">
                     {% csrf_token %}
                     <button type="submit" name="details" value="{{user.id}}" class="btn btn-sm btn-outline-primary mx-2"> More </button>
                     <!-- <input type="submit" class="btn btn-sm btn-outline-primary mx-2" value="More"> -->

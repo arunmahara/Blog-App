@@ -1,0 +1,158 @@
+{% extends 'blog.html' %}
+{% load static %}
+{% block content %}
+<style>   
+    .overlay {
+      margin-top: 50px;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.8);
+        transition: opacity 500ms;
+        visibility: hidden;
+        opacity: 0;
+    }
+    .overlay:target {
+        visibility: visible;
+        opacity: 1;
+    }
+    .wrapper {
+        margin: 70px auto;
+        padding: 15px;
+        background: #e7e7e7;
+        border-radius: 5px;
+        width: 30%;
+        position: relative;
+        transition: all 5s ease-in-out;
+    }
+    .wrapper h3 {
+        margin-top: 0;
+      margin-bottom: 0;
+        color: #333;
+    }
+    .container h6{
+      font-size: small;
+      color: rgb(109, 109, 109);
+    }
+    .wrapper .close {
+        position: absolute;
+        top: 10px;
+        right: 30px;
+        transition: all 200ms;
+        font-size: 30px;
+        font-weight: bold;
+        text-decoration: none;
+        color: #333;
+    }
+    .wrapper .close:hover {
+        color: rgb(204, 22, 22);
+    }
+    .wrapper .content {
+        max-height: 30%;
+        overflow: auto;
+    }
+    /*form*/
+    
+    .container {
+        border-radius: 5px;
+        background-color: #e7e7e7;
+        padding: 0 0;
+    }
+    form label {
+        text-transform: uppercase;
+        font-weight: 500;
+        letter-spacing: 3px;
+      margin-bottom: 6px;
+    }
+    input[type=text] {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        resize: vertical;
+    }
+</style>
+
+<div class="feed">
+
+<div class="card" style="width:35%;">
+  <img src="{% static 'image/profile.png'%}" alt="">
+  <h1>{{user.first_name}} {{user.last_name}}</h1>
+  <p class="title mb-2">@{{user.username}}</p>
+  <a href="#divOne" style="text-decoration: none;" class="mb-3 text-primary">
+    {{total_followers}}<small style = "color: grey;"> Followers</small>
+    <small class="text-danger"> | </small>
+    {{total_following}}<small style = "color: grey;"> Following</small>
+  </a>
+  </form>
+</div>
+
+  <h5 class="col-sm-4 alert alert-primary text-center my-3 p-1">Blogs Posted By {{user.first_name}} {{user.last_name}}</h5> 
+    <!-- post starts -->
+    {% if blogs %}
+    {% for blog in blogs %}
+    <div class="post">
+      <div class="post__top">
+        <div class="post__topInfo">
+          <h3>{{user.first_name}} {{user.last_name}}</h3>
+          <p>Posted on: {{blog.datetime}}</p>
+        </div>
+      </div>
+
+      {% if blog.picture %}
+      <div class="post__image">
+        <img src="{{blog.picture.url}}" alt="" />
+      </div>
+      {% endif %}
+      
+      <div class="post__bottom1">
+        <h6>: {{blog.title}}</h6>
+      </div>
+      <div class="post__bottom2">
+        <small>{{blog.desc}}</small>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <!-- <h2 style="margin: 20px;">Sorry, No Blogs Available</h2> -->
+    <h5 class="alert alert-danger my-3">Sorry, No Blogs Available!</h5>
+    {% endif %}
+  </div>
+
+  <div class="overlay" id="divOne">
+    <div class="wrapper">
+      <h3>{{user.first_name}} {{user.last_name}}</h3><a class="close" href="#">&times;</a>
+      <h6 class="text-primary">{{total_followers}}<small style = "color: grey;"> Followers </small> <small class="text-danger"> | </small> {{total_following}}<small style = "color: grey;"> Following</small></h6>
+      <div class="content">
+        <div class="container">
+          <form>
+            <label>Followers</label>
+            {% if followers %}
+              {% for each in followers %}
+                <h6>{{each.followers.first_name}} {{each.followers.last_name}} @{{each.followers}}</h6>
+              {% endfor %}
+            {% else %}
+                <h6>No Follower</h6>
+            {% endif %}
+            
+            <label class="mt-3">Following</label>
+            {% if following %}
+              {% for each in following %}
+                <h6>{{each.person.first_name}} {{each.person.last_name}} @{{each.person}}</h6>
+              {% endfor %}
+              {% else %}
+              <h6>No Following</h6>
+            {% endif %} 
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- feed ends -->
+
+{% endblock %}

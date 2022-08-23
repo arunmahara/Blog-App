@@ -166,3 +166,15 @@ def followUnfollow(request, id):
         else:
             Connection.objects.create(person=user, followers=request.user)  #follow
     return redirect('connect')
+
+# show user details  
+def userDetails(request):
+    user_id = request.POST.get('details')
+    user = User.objects.get(pk=user_id)
+    followers = Connection.objects.filter(person=user)     #follower objects of user
+    following = Connection.objects.filter(followers=user)  #following objects of user
+    total_followers = followers.count()  
+    total_following = following.count()
+    blog = Blog.objects.filter(user=user).order_by('-datetime')  #blog posted by user
+    context = {'user':user,'followers':followers, 'total_followers':total_followers, 'following':following, 'total_following':total_following, 'blogs':blog}
+    return render(request, 'userdetails.html', context)
