@@ -1,4 +1,8 @@
 # Blog App
+
+### Deployed on Heroku
+Click [Here](https://app-miniblog.herokuapp.com/home) to vist website.
+
 ### Use of:                      
 Relational Model <br>
 Forms/ModelForm <br>
